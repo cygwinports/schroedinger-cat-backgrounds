@@ -1,0 +1,45 @@
+NAME="schroedinger-cat-backgrounds"
+VERSION=18.91.0
+RELEASE=1
+CATEGORY="X11"
+SUMMARY="Fedora 19 desktop wallpaper"
+DESCRIPTION="Default wallpaper for the Fedora 19 release, along with a
+collection of selected wallpapers contributed by the Fedora community."
+HOMEPAGE="https://fedoraproject.org/wiki/Design"
+SRC_URI="https://fedorahosted.org/released/design-team/${NAME}-${VERSION}.tar.xz"
+
+ARCH=noarch
+
+PKG_NAMES="${NAME} ${NAME}-animated ${NAME}-extras"
+schroedinger_cat_backgrounds_DOCS="Attribution CC-BY-SA-3.0"
+schroedinger_cat_backgrounds_CONTENTS="
+	usr/share/backgrounds/schroedinger-cat/default/
+	usr/share/backgrounds/xfce/schroedinger-cat.*
+	usr/share/wallpapers/Schroedinger_Cat/
+"
+schroedinger_cat_backgrounds_animated_DOCS="Attribution CC-BY-SA-3.0"
+schroedinger_cat_backgrounds_animated_CONTENTS="
+	usr/share/backgrounds/schroedinger-cat/default-animated/
+	usr/share/gnome-background-properties/schroedinger-cat-animated.xml
+	usr/share/mate-background-properties/schroedinger-cat-animated.xml
+"
+schroedinger_cat_backgrounds_extras_SUMMARY="Fedora 19 extra wallpapers"
+schroedinger_cat_backgrounds_extras_DOCS="Attribution-Extras CC-BY-SA-3.0"
+schroedinger_cat_backgrounds_extras_CONTENTS="
+	usr/share/backgrounds/schroedinger-cat/extras/
+	usr/share/backgrounds/xfce/schroedinger-cat-*
+	usr/share/gnome-background-properties/schroedinger-cat-extras.xml
+	usr/share/mate-background-properties/schroedinger-cat-extras.xml
+	usr/share/wallpapers/Schroedinger_Cat_*/
+"
+
+src_compile() {
+	cd ${S}
+	cygmake
+}
+
+src_install() {
+	cd ${S}
+	cyginstall
+	mv ${D}/usr/share/{xfce4/backdrops,backgrounds/xfce}
+}
